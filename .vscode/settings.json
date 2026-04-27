@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Turnos_o26v.sln"
+    "dotnet.defaultSolution": "pruebaProyectoL.sln"
 }
