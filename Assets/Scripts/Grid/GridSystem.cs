@@ -1,37 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridSystem
+public class GridSystem<TGridObject>
 {
-    //se utilizan los GridObject para crear el sistema, todo el Piso
     private int width;
     private int height;
     private float cellSize;
-    private GridObject[,] gridObjectArray; //matriz
+    private TGridObject[,] gridObjectArray;
 
-    public GridSystem(int width, int height, float cellSize)
+    public GridSystem(int width, int height, float cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
 
-        gridObjectArray = new GridObject[width, height];
+        gridObjectArray = new TGridObject[width, height];
 
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < height; z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                gridObjectArray[x, z] = new GridObject(this, gridPosition);
+                gridObjectArray[x, z] = createGridObject(this, gridPosition);
             }
         }
     }
 
-    //estas dos funcionas transforman la informaci{on}
     public Vector3 GetWorldPosition(GridPosition gridPosition)
     {
-        return new Vector3(gridPosition.x, 0, gridPosition.z) * cellSize; //convierte la posicion a float y se multiplica por el tamaño de la celda
+        return new Vector3(gridPosition.x, 0, gridPosition.z) * cellSize;
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
@@ -57,7 +56,7 @@ public class GridSystem
         }
     }
 
-    public GridObject GetGridObject(GridPosition gridPosition)
+    public TGridObject GetGridObject(GridPosition gridPosition)
     {
         return gridObjectArray[gridPosition.x, gridPosition.z];
     }
