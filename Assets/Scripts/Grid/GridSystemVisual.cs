@@ -63,7 +63,7 @@ public class GridSystemVisual : MonoBehaviour
             }
         }
 
-        SistemaAccionesDeUnites.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
+        UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
 
         UpdateGridVisual();
@@ -121,25 +121,25 @@ public class GridSystemVisual : MonoBehaviour
     {
         HideAllGridPosition();
 
-        Unit selectedUnit = SistemaAccionesDeUnites.Instance.GetUnitSeleccionada();
-        BaseAction selectedAction = SistemaAccionesDeUnites.Instance.GetSelectedAction();
+        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
+        BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
 
         GridVisualType gridVisualType;
 
         switch (selectedAction)
         {
             default:
-            case MoveAction moveAction:
+            /*case MoveAction moveAction:
                 gridVisualType = GridVisualType.White;
-                break;
+                break;*/
             case SpinAction spinAction:
                 gridVisualType = GridVisualType.Blue;
                 break;
-            case ShootAction shootAction:
+            /*case ShootAction shootAction:
                 gridVisualType = GridVisualType.Red;
 
                 ShowGridPositionRange(selectedUnit.GetGridPosition(), shootAction.GetMaxShootDistance(), GridVisualType.RedSoft);
-                break;
+                break;*/
         }
 
         ShowGridPositionList(
