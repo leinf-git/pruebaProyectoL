@@ -33,7 +33,7 @@ public class LevelGrid : MonoBehaviour
         // Creamos nuestra matriz de nivel
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, (GridSystem<GridObject> g, GridPosition gp) => new GridObject(g, gp));
 
-        gridSystem.CreateDebugObjects(gridDebugObjectPrefab); //crea los mosaicos del suelo
+      //gridSystem.CreateDebugObjects(gridDebugObjectPrefab); //crea los mosaicos del suelo
     }
 
     private void Start()
